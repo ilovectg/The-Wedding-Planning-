@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Best Wedding Planning Services</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <style>
+        :root {
+            --primary-purple: #6B4C9A;
+            --light-purple: #9D7FC5;
+            --dark-purple: #4A3472;
+            --accent-pink: #E486B6;
+            --light-bg: #F8F5FB;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--dark-purple) 0%, var(--primary-purple) 100%) !important;
+            box-shadow: 0 4px 15px rgba(107, 76, 154, 0.2);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.6rem;
+            color: white !important;
+            font-weight: 700;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            margin: 0 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-pink) !important;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(107, 76, 154, 0.85) 0%, rgba(157, 127, 197, 0.85) 100%), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=800&fit=crop') center/cover;
+            color: white;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            padding: 60px 20px;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section .lead {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .btn-purple {
+            background: linear-gradient(90deg, var(--accent-pink), #E486B6);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            padding: 12px 40px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-purple:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(228, 134, 182, 0.4);
+            color: white;
+        }
+
+        .features-section {
+            padding: 80px 0;
+            background: var(--light-bg);
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(107, 76, 154, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary-purple);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(107, 76, 154, 0.25);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--accent-pink);
+            margin-bottom: 15px;
+        }
+
+        .about-section {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(107, 76, 154, 0.2);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary-purple);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(107, 76, 154, 0.15);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .package-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(107, 76, 154, 0.25);
+        }
+
+        .package-card.featured {
+            border: 3px solid var(--accent-pink);
+            transform: scale(1.05);
+        }
+
+        .package-header {
+            background: linear-gradient(135deg, var(--primary-purple), var(--light-purple));
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-purple);
+            font-weight: 700;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(107, 76, 154, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stars {
+            color: var(--accent-pink);
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: linear-gradient(90deg, var(--dark-purple) 0%, var(--primary-purple) 100%);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .about-content { grid-template-columns: 1fr; }
+            .package-card.featured { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- ====================================
+         NAVIGATION BAR
+         ==================================== -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-ring me-2"></i>The Best Wedding
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pages/packages.html">Packages</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Reviews</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-purple text-white ms-2" href="pages/login.html">
+                            <i class="fas fa-sign-in-alt me-1"></i>Login
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ====================================
+         HERO SECTION
+         ==================================== -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row h-100 align-items-center">
+                <div class="col-lg-6">
+                    <h1>Your Dream Wedding Made Perfect</h1>
+                    <p class="lead">We turn dreams into timeless moments. From first ideas to "I do," we craft weddings with care, creativity, and heart.</p>
+                    <div>
+                        <a href="pages/booking.html" class="btn btn-purple me-3">
+                            <i class="fas fa-calendar-check me-2"></i>Book Now
+                        </a>
+                        <a href="#services" class="btn btn-outline-light">
+                            <i class="fas fa-arrow-down me-2"></i>Explore Services
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&h=400&fit=crop" 
+                         alt="Wedding Planning" class="img-fluid rounded-3" style="box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================
+         ABOUT SECTION
+         ==================================== -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&h=400&fit=crop" alt="Beautiful Wedding">
+                </div>
+                <div class="about-text">
+                    <h2>Your Dream, Our Promise</h2>
+                    <p>Every wedding tells a story. Ours begins by listening to yours, understanding your vision, and making it beautifully real.</p>
+                    <p>With 500+ successful weddings, our team brings expertise, creativity, and dedication to every detail.</p>
+                    <div style="margin-top: 30px;">
+                        <div style="margin-bottom: 15px; display: flex; gap: 15px; align-items: center;">
+                            <i class="fas fa-check-circle" style="font-size: 1.5rem; color: var(--accent-pink);"></i>
+                            <span style="font-weight: 600;">Professional Event Planners</span>
+                        </div>
+                        <div style="margin-bottom: 15px; display: flex; gap: 15px; align-items: center;">
+                            <i class="fas fa-check-circle" style="font-size: 1.5rem; color: var(--accent-pink);"></i>
+                            <span style="font-weight: 600;">Premium Venues & Services</span>
+                        </div>
+                        <div style="margin-bottom: 15px; display: flex; gap: 15px; align-items: center;">
+                            <i class="fas fa-check-circle" style="font-size: 1.5rem; color: var(--accent-pink);"></i>
+                            <span style="font-weight: 600;">24/7 Customer Support</span>
+                        </div>
+                        <div style="display: flex; gap: 15px; align-items: center;">
+                            <i class="fas fa-check-circle" style="font-size: 1.5rem; color: var(--accent-pink);"></i>
+                            <span style="font-weight: 600;">Flexible Packages & Budget</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================
+         TESTIMONIALS SECTION
+         ==================================== -->
+    <section id="testimonials" style="padding: 100px 0; background: var(--light-bg);">
+        <div class="container">
+            <div class="section-title">
+                <h2>💬 What Our Clients Say</h2>
+                <p>Real stories from real couples</p>
+            </div>
+            <div class="row" style="margin-top: 50px;">
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p style="color: #555; margin-bottom: 20px; line-height: 1.7; font-style: italic;">"Absolutely amazing! They made our dream wedding come true. Every detail was perfect!"</p>
+                        <div style="font-weight: 700; color: var(--primary-purple); margin-bottom: 5px;">Ayesha & Karim</div>
+                        <div style="color: #999; font-size: 0.9rem;">June 2024 Wedding</div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p style="color: #555; margin-bottom: 20px; line-height: 1.7; font-style: italic;">"Professional, creative, and incredibly helpful. They exceeded all our expectations!"</p>
+                        <div style="font-weight: 700; color: var(--primary-purple); margin-bottom: 5px;">Mona & Rauf</div>
+                        <div style="color: #999; font-size: 0.9rem;">July 2024 Wedding</div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p style="color: #555; margin-bottom: 20px; line-height: 1.7; font-style: italic;">"Worth every penny! The service and attention to detail was outstanding."</p>
+                        <div style="font-weight: 700; color: var(--primary-purple); margin-bottom: 5px;">Sana & Rahim</div>
+                        <div style="color: #999; font-size: 0.9rem;">August 2024 Wedding</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================
+         CTA SECTION
+         ==================================== -->
+    <section style="background: linear-gradient(135deg, var(--primary-purple), var(--light-purple)); color: white; padding: 60px 0; text-align: center;">
+        <div class="container">
+            <h2 style="margin-bottom: 20px; font-weight: 700; font-size: 2.5rem;">Ready to Plan Your Dream Wedding?</h2>
+            <p style="margin-bottom: 40px; font-size: 1.1rem; color: rgba(255, 255, 255, 0.95);">Get started today and create your perfect wedding experience</p>
+            <div>
+                <a href="pages/registration.html" class="btn btn-light btn-lg me-3" style="border-radius: 30px; padding: 12px 40px; font-weight: 600;">
+                    <i class="fas fa-user-plus me-2"></i>Create Account
+                </a>
+                <a href="pages/booking.html" class="btn btn-outline-light btn-lg" style="border-radius: 30px; padding: 12px 40px; font-weight: 600;">
+                    <i class="fas fa-calendar-check me-2"></i>Book Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================
+         TESTIMONIALS
+         ==================================== -->
+    <section class="testimonials-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">💬 What Our Clients Say</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="stars mb-2">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p>"Amazing service! Made our wedding planning so easy. Highly recommended!"</p>
+                        <h6 class="fw-bold">- Ayesha & Karim</h6>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="stars mb-2">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p>"Best wedding planning platform. Everything was perfect!"</p>
+                        <h6 class="fw-bold">- Mona & Ahmed</h6>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="stars mb-2">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p>"Professional team, affordable prices, and excellent support!"</p>
+                        <h6 class="fw-bold">- Sana & Rauf</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================
+         FOOTER
+         ==================================== -->
+    <footer>
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-3">
+                    <h5 style="margin-bottom: 20px; font-weight: 700; color: var(--accent-pink);">
+                        <i class="fas fa-ring me-2"></i>The Best Wedding
+                    </h5>
+                    <p>Making your dream wedding a reality with passion and dedication.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="#" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s ease;">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s ease;">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s ease;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h5 style="margin-bottom: 20px; font-weight: 700; color: var(--accent-pink);">Quick Links</h5>
+                    <a href="#home" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; margin-bottom: 10px; transition: all 0.3s ease;">Home</a>
+                    <a href="#services" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; margin-bottom: 10px; transition: all 0.3s ease;">Services</a>
+                    <a href="pages/packages.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; margin-bottom: 10px; transition: all 0.3s ease;">Packages</a>
+                    <a href="pages/booking.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; margin-bottom: 10px; transition: all 0.3s ease;">Book Now</a>
+                </div>
+                <div class="col-md-3">
+                    <h5 style="margin-bottom: 20px; font-weight: 700; color: var(--accent-pink);">Services</h5>
+                    <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; margin-bottom: 10px;">Venue Selection</a>
+                    <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; margin-bottom: 10px;">Catering</a>
+                    <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; margin-bottom: 10px;">Photography</a>
+                    <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; margin-bottom: 10px;">Decoration</a>
+                </div>
+                <div class="col-md-3">
+                    <h5 style="margin-bottom: 20px; font-weight: 700; color: var(--accent-pink);">Contact</h5>
+                    <a href="tel:+8801234567890" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; margin-bottom: 10px;">
+                        <i class="fas fa-phone me-2"></i>+880 1234 567890
+                    </a>
+                    <a href="mailto:info@wedding.com" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; margin-bottom: 10px;">
+                        <i class="fas fa-envelope me-2"></i>info@wedding.com
+                    </a>
+                    <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block;">
+                        <i class="fas fa-map-marker-alt me-2"></i>Dhaka, Bangladesh
+                    </a>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255, 255, 255, 0.2); margin-top: 40px; padding-top: 30px; text-align: center; color: rgba(255, 255, 255, 0.7);">
+                <p>&copy; 2026 The Best Wedding Planning Services. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--accent-pink);"></i> for you.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>

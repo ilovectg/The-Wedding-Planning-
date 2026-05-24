@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - The Best Wedding Planning Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        :root{
+            --accent-1: #6b46c1; /* deep purple */
+            --accent-2: #a78bfa; /* light lilac */
+            --accent-3: #f3e8ff; /* pale lavender */
+            --muted: #6b7280;
+            --card-bg: #ffffff;
+            --glass: rgba(255,255,255,0.6);
+        }
+        body { background: linear-gradient(180deg,#f9fafb 0%, #fff 100%); }
+        .admin-hero { background: linear-gradient(135deg, #1f1140 0%, var(--accent-1) 70%); color: white; padding: 48px 0; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; }
+        .admin-hero h1{ color:#fff; }
+        .stat-card, .panel-card { border: 0; border-radius: 14px; box-shadow: 0 10px 30px rgba(15,23,42,0.08); background: var(--card-bg); }
+        .stat-card { padding:18px; }
+        .stat-icon { width:48px; height:48px; display:inline-grid; place-items:center; border-radius:12px; background: linear-gradient(180deg,var(--accent-2),var(--accent-1)); color:#fff; margin-right:12px; }
+        .stat-meta { color:var(--muted); font-size:0.85rem; }
+        .stat-value { font-weight:800; font-size:1.5rem; color:#0f172a; }
+        .stat-trend { font-size:0.8rem; color:#059669; font-weight:700; }
+        .revenue-chart { display:flex; gap:12px; align-items:end; height:120px; padding:8px 0; }
+        .revenue-bar { width:34px; border-radius:8px 8px 6px 6px; background:var(--accent-3); display:flex; align-items:flex-end; justify-content:center; transition:transform .18s ease; }
+        .revenue-bar:hover{ transform:translateY(-6px); }
+        .revenue-bar.fill { background:linear-gradient(180deg,var(--accent-1),var(--accent-2)); }
+        .revenue-label { text-align:center; font-size:0.78rem; color:var(--muted); margin-top:8px; }
+        .recent-booking { display:flex; align-items:center; gap:12px; padding:12px; border-radius:10px; background: linear-gradient(180deg,#fff,#fbf8ff); box-shadow: 0 6px 18px rgba(15,23,42,0.04); margin-bottom:10px; }
+        .recent-booking .avatar { width:46px; height:46px; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; font-weight:700; background:var(--accent-3); color:var(--accent-1); }
+        .status-badge { padding:6px 10px; border-radius:999px; font-weight:700; font-size:0.85rem; }
+        .status-badge.confirmed { background:#ecfdf5; color:#065f46; }
+        .status-badge.reviewing { background:#fff7ed; color:#92400e; }
+        .status-badge.pending { background:#fff1f2; color:#991b1b; }
+        .panel-card h6{ margin-bottom:12px; color:#0f172a; }
+        .card .btn-danger{ background: linear-gradient(180deg,var(--accent-1),#5b21b6); border:0; }
+        @media (max-width: 767px) { .revenue-chart { height:90px; } .stat-icon{width:40px;height:40px} }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-danger" href="../index.html"><i class="fas fa-ring me-2"></i>The Best Wedding</a>
+            <button id="logoutBtn" class="btn btn-outline-light btn-sm ms-auto">Logout</button>
+        </div>
+    </nav>
+
+    <section class="admin-hero">
+        <div class="container">
+            <h1 class="display-5 fw-bold mb-2">Admin Dashboard</h1>
+            <p class="lead mb-0">Manage bookings, users, packages, and venues from one control panel.</p>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-sm-6 col-md-3">
+                    <div class="card stat-card d-flex align-items-center p-3">
+                        <div class="d-flex align-items-center w-100">
+                            <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                            <div style="flex:1">
+                                <div class="stat-meta">Total Bookings</div>
+                                <div class="stat-value" id="totalBookings">0</div>
+                            </div>
+                            <div class="text-end">
+                                <div class="stat-trend">+12%</div>
+                                <div class="small text-muted">this month</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="card stat-card d-flex align-items-center p-3">
+                        <div class="d-flex align-items-center w-100">
+                            <div class="stat-icon"><i class="fas fa-users"></i></div>
+                            <div style="flex:1">
+                                <div class="stat-meta">Active Users</div>
+                                <div class="stat-value" id="totalUsers">0</div>
+                            </div>
+                            <div class="text-end">
+                                <div class="stat-trend text-success">+24 new</div>
+                                <div class="small text-muted">today</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="card stat-card d-flex align-items-center p-3">
+                        <div class="d-flex align-items-center w-100">
+                            <div class="stat-icon"><i class="fas fa-wallet"></i></div>
+                            <div style="flex:1">
+                                <div class="stat-meta">Revenue</div>
+                                <div class="stat-value" id="totalRevenue">৳0</div>
+                            </div>
+                            <div class="text-end">
+                                <div class="stat-trend">+8%</div>
+                                <div class="small text-muted">this month</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="card stat-card d-flex align-items-center p-3">
+                        <div class="d-flex align-items-center w-100">
+                            <div class="stat-icon"><i class="fas fa-hourglass-half"></i></div>
+                            <div style="flex:1">
+                                <div class="stat-meta">Pending</div>
+                                <div class="stat-value" id="pendingBookings">0</div>
+                            </div>
+                            <div class="text-end">
+                                <div class="stat-trend text-warning">3</div>
+                                <div class="small text-muted">need review</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-lg-7">
+                    <div class="card panel-card p-4 h-100">
+                        <h6 class="text-muted mb-2">Monthly Revenue</h6>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <div class="h3 fw-bold" id="monthRevenueValue">৳0</div>
+                                <div class="small text-muted">This month</div>
+                            </div>
+                            <div class="text-end small text-success">+8% this month</div>
+                        </div>
+                        <div id="monthlyRevenueChart" class="revenue-chart" aria-hidden="false"></div>
+                        <div class="d-flex justify-content-between mt-2">
+                            <div class="revenue-label">Nov</div>
+                            <div class="revenue-label">Dec</div>
+                            <div class="revenue-label">Jan</div>
+                            <div class="revenue-label">Feb</div>
+                            <div class="revenue-label">Mar</div>
+                            <div class="revenue-label">Apr</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="card panel-card p-4 h-100">
+                        <h6 class="mb-3">Recent Bookings</h6>
+                        <div id="recentBookingsList">
+                            <!-- Recent bookings rendered here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card panel-card p-4 h-100">
+                        <h5 class="mb-3">Create Package</h5>
+                        <form id="packageForm" class="row g-3">
+                            <div class="col-md-6"><input class="form-control" id="package_name" placeholder="Package name" required></div>
+                            <div class="col-md-6"><select class="form-control" id="package_type" required><option value="">Package type</option><option>Silver</option><option>Gold</option><option>Premium</option></select></div>
+                            <div class="col-md-6"><input class="form-control" id="price" type="number" placeholder="Price" required></div>
+                            <div class="col-md-6"><input class="form-control" id="guest_capacity" type="number" placeholder="Guest capacity" required></div>
+                            <div class="col-12"><textarea class="form-control" id="description" rows="3" placeholder="Description"></textarea></div>
+                            <div class="col-12"><button class="btn btn-danger">Save Package</button></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card panel-card p-4 h-100">
+                        <h5 class="mb-3">Create Venue</h5>
+                        <form id="venueForm" class="row g-3">
+                            <div class="col-md-6"><input class="form-control" id="venue_name" placeholder="Venue name" required></div>
+                            <div class="col-md-6"><input class="form-control" id="city" placeholder="City" required></div>
+                            <div class="col-md-6"><input class="form-control" id="location" placeholder="Location" required></div>
+                            <div class="col-md-6"><input class="form-control" id="capacity" type="number" placeholder="Capacity" required></div>
+                            <div class="col-md-6"><input class="form-control" id="price_per_day" type="number" placeholder="Price per day" required></div>
+                            <div class="col-md-6"><input class="form-control" id="phone" placeholder="Phone"></div>
+                            <div class="col-12"><input class="form-control" id="email" type="email" placeholder="Email"></div>
+                            <div class="col-12"><textarea class="form-control" id="amenities" rows="3" placeholder="Amenities"></textarea></div>
+                            <div class="col-12"><button class="btn btn-danger">Save Venue</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        function requireAdmin() {
+            let user = null;
+            try {
+                user = JSON.parse(localStorage.getItem('user') || 'null');
+            } catch (error) {
+                user = null;
+            }
+
+            const token = (() => {
+                try {
+                    return APP.getData('token') || localStorage.getItem('token') || '';
+                } catch (error) {
+                    return localStorage.getItem('token') || '';
+                }
+            })();
+
+            if (!token || !user || user.role !== 'admin') {
+                window.location.href = 'admin-login.html';
+                return false;
+            }
+            return true;
+        }
+
+        function renderDemoAdminData() {
+            const demoDashboard = {
+                totalBookings: 12,
+                totalUsers: 48,
+                totalRevenue: 875000,
+                pendingBookings: 3
+            };
+
+            const demoBookings = [
+                { booking_id: 301, first_name: 'Ayesha', last_name: 'Khan', event_date: '2026-06-12', status: 'Pending' },
+                { booking_id: 302, first_name: 'Mona', last_name: 'Islam', event_date: '2026-07-08', status: 'Approved' }
+            ];
+
+            const demoUsers = [
+                { user_id: 11, first_name: 'Ayesha', last_name: 'Khan', email: 'ayesha@example.com' },
+                { user_id: 12, first_name: 'Mona', last_name: 'Islam', email: 'mona@example.com' }
+            ];
+
+            document.getElementById('totalBookings').textContent = demoDashboard.totalBookings;
+            document.getElementById('totalUsers').textContent = demoDashboard.totalUsers;
+            document.getElementById('totalRevenue').textContent = APP.formatCurrency(demoDashboard.totalRevenue);
+            document.getElementById('pendingBookings').textContent = demoDashboard.pendingBookings;
+
+            // Render demo recent bookings into the new Recent Bookings card
+            const recentContainer = document.getElementById('recentBookingsList');
+            recentContainer.innerHTML = '';
+            demoBookings.forEach(b => {
+                const div = document.createElement('div');
+                div.className = 'recent-booking';
+                const initials = ((b.first_name||'').charAt(0) + (b.last_name||'').charAt(0)).toUpperCase() || '#';
+                div.innerHTML = `
+                    <div class="avatar">${initials}</div>
+                    <div style="flex:1">
+                        <div class="fw-semibold">${b.first_name} ${b.last_name}</div>
+                        <div class="small text-muted">${b.event_date}</div>
+                    </div>
+                    <div style="text-align:right">
+                        <div class="status-badge ${b.status === 'Approved' ? 'confirmed' : b.status === 'Reviewing' ? 'reviewing' : 'pending'}">${b.status}</div>
+                    </div>
+                `;
+                recentContainer.appendChild(div);
+            });
+        }
+
+        async function loadAdminData() {
+            if (!requireAdmin()) return;
+
+            const isDemoSession = (() => {
+                try {
+                    return (APP.getData('token') || localStorage.getItem('token') || '').startsWith('demo-');
+                } catch (error) {
+                    return (localStorage.getItem('token') || '').startsWith('demo-');
+                }
+            })();
+
+            if (isDemoSession) {
+                renderDemoAdminData();
+                return;
+            }
+
+            try {
+                const [dashboard, bookings, users] = await Promise.all([
+                    APP.makeApiRequest('/admin/dashboard'),
+                    APP.makeApiRequest('/admin/bookings'),
+                    APP.makeApiRequest('/admin/users')
+                ]);
+
+                document.getElementById('totalBookings').textContent = dashboard.totalBookings ?? 0;
+                document.getElementById('totalUsers').textContent = dashboard.totalUsers ?? 0;
+                document.getElementById('totalRevenue').textContent = APP.formatCurrency(dashboard.totalRevenue || 0);
+                document.getElementById('pendingBookings').textContent = dashboard.pendingBookings ?? 0;
+
+                // Render monthly revenue chart (use dashboard.revenueByMonth if provided, otherwise demo values)
+                function renderMonthlyRevenue(data) {
+                    const chart = document.getElementById('monthlyRevenueChart');
+                    chart.innerHTML = '';
+                    const months = data.months || ['Nov','Dec','Jan','Feb','Mar','Apr'];
+                    const values = data.values || [1200000, 1400000, 1600000, 1300000, 1480000, dashboard.totalRevenue || 0];
+                    const max = Math.max(...values, 1);
+                    values.forEach((v, i) => {
+                        const h = Math.round((v / max) * 100);
+                        const bar = document.createElement('div');
+                        bar.className = 'revenue-bar' + (i === values.length-1 ? ' fill' : '');
+                        bar.style.height = `${Math.max(10, h)}%`;
+                        bar.title = months[i] + ': ' + APP.formatCurrency(v);
+                        chart.appendChild(bar);
+                    });
+                    document.getElementById('monthRevenueValue').textContent = APP.formatCurrency(values[values.length-1] || 0);
+                }
+
+                // Render recent bookings list
+                function renderRecentBookings(list) {
+                    const container = document.getElementById('recentBookingsList');
+                    container.innerHTML = '';
+                    if (!list || !list.length) {
+                        container.innerHTML = '<div class="text-muted">No recent bookings.</div>';
+                        return;
+                    }
+                    list.slice(0,6).forEach(b => {
+                        const item = document.createElement('div');
+                        item.className = 'recent-booking';
+                        const initials = ((b.first_name||'').charAt(0) + (b.last_name||'').charAt(0)).toUpperCase() || '#';
+                        const status = (b.status || 'Pending').toLowerCase();
+                        const statusClass = status === 'approved' ? 'confirmed' : status === 'reviewing' ? 'reviewing' : status === 'pending' ? 'pending' : 'pending';
+                        item.innerHTML = `
+                            <div class="avatar">${initials}</div>
+                            <div style="flex:1">
+                                <div class="fw-semibold">${b.first_name||''} ${b.last_name||''}</div>
+                                <div class="small text-muted">${b.event_date || '-'} · Guests: ${b.guest_count || '-'}</div>
+                            </div>
+                            <div style="text-align:right">
+                                <div class="status-badge ${statusClass}">${b.status || 'Pending'}</div>
+                            </div>
+                        `;
+                        container.appendChild(item);
+                    });
+                }
+
+                // Try to use analytics if available
+                if (dashboard.revenueByMonth && Array.isArray(dashboard.revenueByMonth)) {
+                    const months = dashboard.revenueByMonth.map(r => r.month || '');
+                    const values = dashboard.revenueByMonth.map(r => Number(r.revenue) || 0);
+                    renderMonthlyRevenue({ months, values });
+                } else {
+                    renderMonthlyRevenue({});
+                }
+
+                // Recent bookings: sort by date desc
+                const recent = bookings.slice().sort((a,b)=> new Date(b.event_date) - new Date(a.event_date));
+                renderRecentBookings(recent.length ? recent : bookings.slice().reverse());
+            } catch (error) {
+                document.getElementById('totalBookings').textContent = '0';
+                document.getElementById('totalUsers').textContent = '0';
+                document.getElementById('totalRevenue').textContent = APP.formatCurrency(0);
+                document.getElementById('pendingBookings').textContent = '0';
+                document.getElementById('monthlyRevenueChart').innerHTML = '';
+                document.getElementById('recentBookingsList').innerHTML = '<div class="text-muted">Backend unavailable.</div>';
+            }
+        }
+
+        async function updateBooking(bookingId, action) {
+            try {
+                await APP.makeApiRequest(`/admin/bookings/${bookingId}/${action}`, 'PUT', action === 'reject' ? { reason: 'Rejected from dashboard' } : {});
+                APP.showToast(`Booking ${action}d`, 'success');
+                loadAdminData();
+            } catch (error) {
+                APP.showToast('Unable to update booking', 'danger');
+            }
+        }
+
+        async function deleteUser(userId) {
+            if (!confirm('Delete this user?')) return;
+            try {
+                await APP.makeApiRequest(`/admin/users/${userId}`, 'DELETE');
+                APP.showToast('User deleted', 'success');
+                loadAdminData();
+            } catch (error) {
+                APP.showToast('Unable to delete user', 'danger');
+            }
+        }
+
+        document.getElementById('packageForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                await APP.makeApiRequest('/admin/packages', 'POST', {
+                    package_name: document.getElementById('package_name').value,
+                    package_type: document.getElementById('package_type').value,
+                    price: Number(document.getElementById('price').value),
+                    description: document.getElementById('description').value,
+                    guest_capacity: Number(document.getElementById('guest_capacity').value)
+                });
+                APP.showToast('Package created', 'success');
+                e.target.reset();
+                loadAdminData();
+            } catch (error) {
+                APP.showToast('Unable to create package', 'danger');
+            }
+        });
+
+        document.getElementById('venueForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                await APP.makeApiRequest('/admin/venues', 'POST', {
+                    venue_name: document.getElementById('venue_name').value,
+                    location: document.getElementById('location').value,
+                    city: document.getElementById('city').value,
+                    capacity: Number(document.getElementById('capacity').value),
+                    price_per_day: Number(document.getElementById('price_per_day').value),
+                    amenities: document.getElementById('amenities').value,
+                    phone: document.getElementById('phone').value,
+                    email: document.getElementById('email').value
+                });
+                APP.showToast('Venue created', 'success');
+                e.target.reset();
+                loadAdminData();
+            } catch (error) {
+                APP.showToast('Unable to create venue', 'danger');
+            }
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', APP.logout);
+        loadAdminData();
+    </script>
+</body>
+</html>

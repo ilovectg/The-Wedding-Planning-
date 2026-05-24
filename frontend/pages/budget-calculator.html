@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Calculator - Wedding Planning Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        .calculator-hero {
+            background: linear-gradient(135deg, #667eea 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 60px 0;
+        }
+        .calculator-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+        .input-group-text {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+        }
+        .budget-breakdown {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+        .breakdown-item.total {
+            border-top: 2px solid var(--primary-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            padding-top: 15px;
+            color: var(--primary-color);
+        }
+        .slider-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 10px;
+        }
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(216, 27, 96, 0.3);
+        }
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(216, 27, 96, 0.3);
+        }
+        .suggestion-box {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ec407a 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .package-option {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .package-option:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.2);
+        }
+        .package-option.selected {
+            border-color: var(--primary-color);
+            background: #ffe5ec;
+        }
+        .package-name {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-danger" href="../index.html">
+                <i class="fas fa-ring me-2"></i>The Best Wedding
+            </a>
+            <div class="ms-auto">
+                <a href="booking.html" class="btn btn-danger btn-sm">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="calculator-hero">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">💰 Wedding Budget Calculator</h1>
+            <p class="lead mb-0">Plan your wedding budget smartly with AI suggestions</p>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="calculator-card">
+                        <h3 class="mb-4">📋 Tell Us Your Details</h3>
+
+                        <form id="budgetForm">
+                            <!-- Guest Count -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Guest Count</label>
+                                <div class="slider-value" id="guestValue">200</div>
+                                <input type="range" class="slider" id="guestSlider" min="50" max="1000" value="200" step="10">
+                                <small class="text-muted d-block mt-2">Drag to adjust: 50 - 1000 guests</small>
+                            </div>
+
+                            <!-- Budget Range -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Your Total Budget</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">৳</span>
+                                    <input type="number" class="form-control" id="budget" placeholder="Enter your budget" min="10000" value="500000">
+                                </div>
+                            </div>
+
+                            <!-- Package Selection -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Select Wedding Package</label>
+                                <div class="package-option" onclick="selectPackage(this, 'Silver')">
+                                    <div class="package-name">💎 Silver Package</div>
+                                    <small>Basic decoration • Catering • Photography (6hrs)</small>
+                                </div>
+                                <div class="package-option" onclick="selectPackage(this, 'Gold')">
+                                    <div class="package-name">⭐ Gold Package</div>
+                                    <small>Premium decoration • Gourmet catering • Photography (10hrs) + Video</small>
+                                </div>
+                                <div class="package-option" onclick="selectPackage(this, 'Premium')">
+                                    <div class="package-name">👑 Premium Package</div>
+                                    <small>Luxury decoration • 5-Star catering • Full day 4K + Drone video</small>
+                                </div>
+                                <input type="hidden" id="selectedPackage" value="Gold">
+                            </div>
+
+                            <!-- Additional Services -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Additional Services</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="makeup" value="20000">
+                                    <label class="form-check-label" for="makeup">
+                                        Makeup Artist - ৳ 20,000
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="transport" value="15000">
+                                    <label class="form-check-label" for="transport">
+                                        Car Rental - ৳ 15,000
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="invitation" value="10000">
+                                    <label class="form-check-label" for="invitation">
+                                        Digital Invitation - ৳ 10,000
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-danger btn-lg w-100" onclick="calculateBudget()">
+                                <i class="fas fa-calculator me-2"></i>Calculate Budget
+                            </button>
+                        </form>
+
+                        <!-- Results -->
+                        <div id="results" style="display: none;">
+                            <div class="budget-breakdown">
+                                <h5 class="mb-3">📊 Budget Breakdown</h5>
+                                <div class="breakdown-item">
+                                    <span>Package Cost</span>
+                                    <span id="packageCost">৳ 0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Per Guest Cost</span>
+                                    <span id="perGuestCost">৳ 0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Additional Services</span>
+                                    <span id="servicesCost">৳ 0</span>
+                                </div>
+                                <div class="breakdown-item total">
+                                    <span>Total Estimated Cost</span>
+                                    <span id="totalCost">৳ 0</span>
+                                </div>
+                            </div>
+
+                            <div class="suggestion-box">
+                                <h5 class="mb-3">🎯 AI Recommendation</h5>
+                                <p id="suggestion"></p>
+                                <div id="remainingBudget" class="mt-3"></div>
+                            </div>
+
+                            <button class="btn btn-primary w-100 mt-4" onclick="proceedToBooking()">
+                                <i class="fas fa-calendar-check me-2"></i>Proceed to Booking
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container text-center">
+            <p class="text-white-50">&copy; 2026 The Best Wedding Planning Services.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Update guest count display
+        document.getElementById('guestSlider').addEventListener('input', function() {
+            document.getElementById('guestValue').textContent = this.value;
+        });
+
+        function selectPackage(element, packageName) {
+            // Remove previous selection
+            document.querySelectorAll('.package-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            // Add selection to clicked element
+            element.classList.add('selected');
+            document.getElementById('selectedPackage').value = packageName;
+        }
+
+        function calculateBudget() {
+            const guests = parseInt(document.getElementById('guestSlider').value);
+            const totalBudget = parseInt(document.getElementById('budget').value);
+            const selectedPackage = document.getElementById('selectedPackage').value;
+
+            // Package base costs
+            const packageCosts = {
+                'Silver': 50000 + (guests * 100),
+                'Gold': 75000 + (guests * 150),
+                'Premium': 125000 + (guests * 200)
+            };
+
+            let additionalServices = 0;
+            if (document.getElementById('makeup').checked) additionalServices += 20000;
+            if (document.getElementById('transport').checked) additionalServices += 15000;
+            if (document.getElementById('invitation').checked) additionalServices += 10000;
+
+            const packageCost = packageCosts[selectedPackage];
+            const totalCost = packageCost + additionalServices;
+            const perGuestCost = packageCost / guests;
+
+            // Update display
+            document.getElementById('packageCost').textContent = APP.formatCurrency(packageCost);
+            document.getElementById('perGuestCost').textContent = APP.formatCurrency(perGuestCost);
+            document.getElementById('servicesCost').textContent = APP.formatCurrency(additionalServices);
+            document.getElementById('totalCost').textContent = APP.formatCurrency(totalCost);
+
+            // Suggestion
+            const remaining = totalBudget - totalCost;
+            let suggestion = '';
+
+            if (remaining > 0) {
+                suggestion = `✓ Great! Your ${selectedPackage} package fits perfectly within your budget.`;
+                document.getElementById('remainingBudget').innerHTML = 
+                    `<p class="text-success">💰 Remaining Budget: <strong>${APP.formatCurrency(remaining)}</strong></p>`;
+            } else {
+                suggestion = `⚠️ Your ${selectedPackage} package exceeds your budget by ${APP.formatCurrency(Math.abs(remaining))}. Consider upgrading your budget or choosing a different package.`;
+                document.getElementById('remainingBudget').innerHTML = 
+                    `<p class="text-warning">⚠️ Budget Shortfall: <strong>${APP.formatCurrency(Math.abs(remaining))}</strong></p>`;
+            }
+
+            document.getElementById('suggestion').textContent = suggestion;
+            document.getElementById('results').style.display = 'block';
+
+            // Save to session
+            APP.setData('budgetData', {
+                guests,
+                totalBudget,
+                selectedPackage,
+                estimatedCost: totalCost
+            });
+        }
+
+        function proceedToBooking() {
+            const selectedPackage = document.getElementById('selectedPackage').value;
+            window.location.href = `booking.html?package=${encodeURIComponent(selectedPackage)}`;
+        }
+    </script>
+</body>
+</html>

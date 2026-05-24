@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - The Best Wedding Planning Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-white" href="../index.html"><i class="fas fa-ring me-2"></i>The Best Wedding</a>
+            <div class="ms-auto d-flex align-items-center gap-2">
+                <a href="dashboard.html" class="btn btn-light btn-sm"><i class="fas fa-arrow-left me-1"></i>Dashboard</a>
+                <button id="logoutBtn" class="btn btn-outline-light btn-sm">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="py-5">
+        <div class="container" style="max-width: 900px;">
+            <div class="card section-card p-4 p-md-5">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div>
+                        <h3 class="mb-1">My Profile</h3>
+                        <p class="text-muted mb-0">See and update your personal information.</p>
+                    </div>
+                    <div class="avatar" id="profileAvatar" style="width:56px;height:56px;">G</div>
+                </div>
+
+                <div id="alertBox" class="alert d-none" role="alert"></div>
+
+                <form id="profileForm" novalidate>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="phone" placeholder="01XXXXXXXXX">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="city" placeholder="Your city">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" placeholder="Your address">
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2 mt-4">
+                        <button type="submit" id="saveBtn" class="btn btn-primary px-4">
+                            <i class="fas fa-save me-1"></i>Save Changes
+                        </button>
+                        <a href="dashboard.html" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        function requireAuth() {
+            if (!localStorage.getItem('token')) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+
+        function getStoredUser() {
+            try {
+                return JSON.parse(localStorage.getItem('user') || 'null');
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function getStoredToken() {
+            try {
+                return APP.getData('token') || localStorage.getItem('token') || '';
+            } catch (error) {
+                return localStorage.getItem('token') || '';
+            }
+        }
+
+        function showAlert(message, type = 'info') {
+            const alertBox = document.getElementById('alertBox');
+            alertBox.className = `alert alert-${type}`;
+            alertBox.textContent = message;
+            alertBox.classList.remove('d-none');
+        }
+
+        function setAvatar(name) {
+            const initial = (name || 'G').trim().charAt(0).toUpperCase() || 'G';
+            document.getElementById('profileAvatar').textContent = initial;
+        }
+
+        function setFormValues(user) {
+            document.getElementById('firstName').value = user.first_name || '';
+            document.getElementById('lastName').value = user.last_name || '';
+            document.getElementById('email').value = user.email || '';
+            document.getElementById('phone').value = user.phone || '';
+            document.getElementById('city').value = user.city || '';
+            document.getElementById('address').value = user.address || '';
+            setAvatar(user.first_name || user.email || 'Guest');
+        }
+
+        function getPayload() {
+            return {
+                first_name: document.getElementById('firstName').value.trim(),
+                last_name: document.getElementById('lastName').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                city: document.getElementById('city').value.trim(),
+                address: document.getElementById('address').value.trim()
+            };
+        }
+
+        function updateStoredUser(payload) {
+            const user = getStoredUser() || {};
+            const updated = {
+                ...user,
+                first_name: payload.first_name,
+                last_name: payload.last_name,
+                phone: payload.phone,
+                city: payload.city,
+                address: payload.address
+            };
+
+            localStorage.setItem('user', JSON.stringify(updated));
+            return updated;
+        }
+
+        function updateDemoUser(payload) {
+            const user = getStoredUser();
+            if (!user || !user.email) return;
+
+            const users = APP.getData('demoUsers') || [];
+            const index = users.findIndex((item) => (item.email || '').toLowerCase() === user.email.toLowerCase());
+            if (index === -1) return;
+
+            users[index] = {
+                ...users[index],
+                ...payload
+            };
+            APP.setData('demoUsers', users);
+        }
+
+        async function loadProfile() {
+            if (!requireAuth()) return;
+
+            const isDemoSession = getStoredToken().startsWith('demo-');
+            const localUser = getStoredUser();
+
+            if (isDemoSession) {
+                if (localUser) {
+                    setFormValues(localUser);
+                } else {
+                    showAlert('User information is not available.', 'warning');
+                }
+                return;
+            }
+
+            try {
+                const profileResponse = await APP.makeApiRequest('/auth/profile');
+                if (!profileResponse || !profileResponse.user) {
+                    showAlert('Could not load profile information.', 'warning');
+                    return;
+                }
+
+                const profile = profileResponse.user;
+                setFormValues(profile);
+                localStorage.setItem('user', JSON.stringify({ ...(localUser || {}), ...profile }));
+            } catch (error) {
+                showAlert('Failed to load profile. Please try again.', 'danger');
+            }
+        }
+
+        async function handleSave(event) {
+            event.preventDefault();
+
+            const payload = getPayload();
+            if (!payload.first_name) {
+                showAlert('First name is required.', 'warning');
+                return;
+            }
+
+            const saveBtn = document.getElementById('saveBtn');
+            saveBtn.disabled = true;
+            saveBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Saving...';
+
+            const isDemoSession = getStoredToken().startsWith('demo-');
+
+            try {
+                if (isDemoSession) {
+                    updateStoredUser(payload);
+                    updateDemoUser(payload);
+                } else {
+                    await APP.makeApiRequest('/auth/profile', 'PUT', payload);
+                    updateStoredUser(payload);
+                }
+
+                setAvatar(payload.first_name || 'Guest');
+                showAlert('Profile updated successfully.', 'success');
+            } catch (error) {
+                showAlert('Failed to update profile. Please try again.', 'danger');
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = '<i class="fas fa-save me-1"></i>Save Changes';
+            }
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', APP.logout);
+        document.getElementById('profileForm').addEventListener('submit', handleSave);
+        loadProfile();
+    </script>
+</body>
+</html>

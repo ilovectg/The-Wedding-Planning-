@@ -1,0 +1,889 @@
+/* ====================================
+   Main Stylesheet - Wedding Planning
+   ==================================== */
+
+/* Root Variables - Purple & Elegant Theme */
+:root {
+    --primary-purple: #3b1f5b; /* deep plum */
+    --primary-color: linear-gradient(90deg,#6f61f9,#ff6ea6);
+    --light-purple: #8f67d6; /* lighter gradient */
+    --dark-purple: #2a1638;
+    --accent-pink: #f7e6f1; /* soft pink for cards */
+    --secondary-color: #f6d6e6;
+    --light-bg: #F8F5FB;
+    --dark-color: #1a1a1a;
+    --light-color: #ffffff;
+    --shadow: 0 8px 25px rgba(107, 76, 154, 0.15);
+    --transition: all 0.3s ease;
+}
+
+/* ====================================
+   Global Styles
+   ==================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #222;
+    background-color: #fbfbfe;
+}
+
+/* ====================================
+   NAVBAR STYLES
+   ==================================== */
+.navbar {
+    background: linear-gradient(90deg, var(--dark-purple) 0%, var(--primary-purple) 100%) !important;
+    box-shadow: 0 2px 10px rgba(107, 76, 154, 0.2);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    color: white !important;
+    font-weight: 700;
+}
+
+.nav-link {
+    margin: 0 15px;
+    color: rgba(255, 255, 255, 0.8) !important;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: var(--accent-pink) !important;
+}
+
+/* ====================================
+   HERO SECTION
+   ==================================== */
+.hero-section {
+    background: linear-gradient(135deg, rgba(107, 76, 154, 0.9) 0%, rgba(157, 127, 197, 0.9) 100%), 
+                url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=600&fit=crop') center/cover;
+    color: white;
+    padding: 100px 0;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(107, 76, 154, 0.4);
+    z-index: 0;
+}
+
+.hero-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    animation: fadeInDown 0.8s ease;
+}
+
+.hero-section .lead {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.btn-danger {
+    background-color: var(--accent-pink);
+    border-color: var(--accent-pink);
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+.btn-danger:hover {
+    background-color: #D16A9A;
+    border-color: #D16A9A;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(228, 134, 182, 0.3);
+}
+
+/* ====================================
+   FEATURES SECTION
+   ==================================== */
+.features-section {
+    padding: 80px 0;
+    background: var(--light-bg);
+}
+
+.feature-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border-top: 4px solid var(--primary-purple);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(107, 76, 154, 0.25);
+}
+
+.feature-card i {
+    font-size: 3rem;
+    color: var(--primary-purple);
+    margin-bottom: 15px;
+}
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.feature-card h5 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* ====================================
+   PACKAGES SECTION
+   ==================================== */
+.packages-preview {
+    background-color: var(--light-color);
+}
+
+.package-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+}
+
+.package-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.package-card.featured {
+    border: 3px solid var(--primary-color);
+}
+
+.ribbon {
+    position: absolute;
+    top: 20px;
+    right: -5px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 5px 20px;
+    transform: rotate(45deg);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.package-header {
+    padding: 30px 20px;
+    color: white;
+    text-align: center;
+}
+
+.package-header.silver {
+    background-color: #c0c0c0;
+}
+
+.package-header.gold {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.package-header.premium {
+    background-color: var(--primary-color);
+}
+
+.package-header h4 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.package-header .price {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.package-body {
+    padding: 30px 20px;
+}
+
+.package-body ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.package-body li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+}
+
+.package-body li:last-child {
+    border-bottom: none;
+}
+
+/* ====================================
+   TESTIMONIALS SECTION
+   ==================================== */
+.testimonials-section {
+    padding: 80px 0;
+}
+
+.testimonial-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary-color);
+    transition: var(--transition);
+}
+
+.testimonial-card:hover {
+    transform: translateX(10px);
+}
+
+.stars {
+    font-size: 1.2rem;
+}
+
+.testimonial-card p {
+    font-style: italic;
+    color: #666;
+    margin: 15px 0;
+}
+
+/* ====================================
+   CTA SECTION
+   ==================================== */
+.cta-section {
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #ec407a 100%);
+}
+
+/* ====================================
+   FOOTER
+   ==================================== */
+footer {
+    background-color: #1a1a1a;
+}
+
+footer h5 {
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+footer a {
+    transition: var(--transition);
+}
+
+footer a:hover {
+    color: var(--primary-color) !important;
+}
+
+/* ====================================
+   FORM STYLES
+   ==================================== */
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(216, 27, 96, 0.25);
+}
+
+.form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* ====================================
+   TABLE STYLES
+   ==================================== */
+.table {
+    background: white;
+}
+
+.table thead {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--light-pink);
+}
+
+/* ====================================
+   BADGE & LABELS
+   ==================================== */
+.badge {
+    padding: 8px 12px;
+    border-radius: 20px;
+}
+
+.badge-danger {
+    background-color: var(--primary-color);
+}
+
+.badge-success {
+    background-color: #4caf50;
+}
+
+.badge-warning {
+    background-color: #ff9800;
+}
+
+.badge-info {
+    background-color: #2196f3;
+}
+
+/* ====================================
+   MODAL STYLES
+   ==================================== */
+.modal-header {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.modal-header .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+/* ====================================
+   CARDS
+   ==================================== */
+.card {
+    border: none;
+    box-shadow: var(--shadow);
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* =====================
+    Dashboard Specific
+    ===================== */
+.dashboard-hero {
+    background: linear-gradient(135deg, #2e1a4f 0%, #5e3fc2 100%);
+    color: #fff;
+    padding: 64px 0;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+
+.dashboard-hero .container { max-width: 1100px; }
+
+.dashboard-hero h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.2px;
+}
+
+.dashboard-hero .lead {
+    color: rgba(255,255,255,0.96);
+    font-size: 1.05rem;
+}
+
+.metric-card {
+    border: 0;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(32, 32, 45, 0.06);
+    background: linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
+}
+
+.metric-card .text-muted { color: #7b6f8f !important; font-weight:600 }
+.metric-card .display-6 { font-size: 2.4rem; color: #1f1b3a }
+
+.section-card { border: 0; border-radius: 14px; box-shadow: 0 14px 40px rgba(32,32,45,0.05); }
+
+/* Sidebar & profile */
+.avatar { border-radius: 50%; width: 88px; height: 88px; display:inline-flex; align-items:center; justify-content:center; font-weight:700 }
+.section-card .btn { border-radius: 8px }
+.section-card .btn-light { text-align: left }
+/* Quick actions in sidebar - make prominent */
+.quick-actions .btn {
+    background: linear-gradient(90deg,#fff 0%, #fbfbff 100%);
+    border: 1px solid rgba(74,42,143,0.12);
+    padding: 10px 12px;
+    font-weight: 700;
+    color: #3b1f5b;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(74,42,143,0.06);
+}
+.quick-actions .btn i { width:20px; text-align:center }
+.quick-actions .btn:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(74,42,143,0.10); background: linear-gradient(90deg,#fffafc,#f5f0ff) }
+.quick-actions .btn.btn-primary { background: linear-gradient(90deg,#6f61f9,#5e3fc2); color:#fff; border: none }
+.quick-actions { margin-top:6px }
+.section-card .small { color: #6b6b7a }
+
+/* Table improvements */
+.table { border-radius: 8px; overflow: hidden; }
+.table tbody tr td { padding: 14px 12px }
+.table thead th { padding: 12px }
+
+/* Buttons */
+.btn-primary { background: linear-gradient(90deg,#6f61f9,#ff6ea6); border: none }
+.btn-outline-primary { border: 1px solid rgba(107,95,180,0.12); color: #6b5fb5 }
+/* Search box */
+.search-box { border-radius: 28px; overflow: hidden; }
+.search-box .form-control { border: none; box-shadow: none; background: transparent; color: rgba(255,255,255,0.95); }
+.search-box .form-control::placeholder { color: rgba(255,255,255,0.75); }
+.search-box .input-group-text { border: none; background: transparent; color: rgba(255,255,255,0.9); }
+.dashboard-hero .search-box { background: linear-gradient(90deg,#3b1f5b,#5e3fc2); padding:4px; }
+
+/* Big Day card */
+.big-day-card { background: linear-gradient(180deg,#f8eef7,#f2dfee); border-radius:14px; box-shadow: 0 12px 28px rgba(43,21,48,0.06); position:relative; }
+.big-day-card .h4 { font-size:1.1rem }
+.big-day-card .fa-heart { color: rgba(107,76,154,0.45); font-size:1.1rem }
+.big-day-card .fa-heart:hover { color: #ff6ea6 }
+.big-day-card .heart-badge { position:absolute; right:12px; top:12px; width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.6); color:#6b5fb5 }
+
+/* Improve content readability hierarchy */
+.dashboard-hero h5 { color: #ffffff; font-weight: 700; letter-spacing: 0.2px; }
+.section-card h5 { color: #2b1c47; font-weight: 700; }
+.section-card .text-muted,
+.package-card .text-muted { color: #6b5f84 !important; }
+.package-card .fw-semibold { color: #24173f; }
+
+/* Featured venues horizontal cards */
+#featuredVenues { padding-bottom:6px }
+.package-card { min-width:170px; max-width:170px; border-radius:12px; overflow:hidden }
+.package-card .package-body { padding:12px }
+
+/* Icon grid like the sample */
+.icon-grid { display:flex; gap:12px; justify-content:space-between; margin-top:12px }
+.icon-grid.hero-icons { justify-content: center; gap:32px }
+.icon-grid .icon-item { background: transparent; padding:0; flex:1; text-align:center }
+.icon-grid .icon-item .icon-box { width:56px; height:56px; margin:0 auto 8px auto; border-radius:12px; display:flex; align-items:center; justify-content:center; background:linear-gradient(90deg,#6f61f9,#ff6ea6); color:white; box-shadow: 0 8px 20px rgba(43,21,48,0.06) }
+.icon-grid .icon-item i { font-size:1.1rem }
+.icon-grid .icon-item .label { display:block; font-size:0.85rem; color:#4b3a7a }
+
+/* Hero icon variant (lighter, pill background) */
+.hero-icons .hero-box {
+    width:64px;
+    height:64px;
+    border-radius:14px;
+    background: linear-gradient(180deg,#ffffff 0%, #fbf8ff 100%);
+    color: #4a2a8f; /* darker purple for icons */
+    box-shadow: 0 10px 28px rgba(74,42,143,0.10);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+    border: 2.4px solid rgba(74,42,143,0.36); /* slightly thicker, darker outline */
+}
+.hero-icons .hero-box svg { width:24px; height:24px }
+.hero-icons .icon-item .label {
+    color: #ffffff !important;
+    font-size: 0.98rem;
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: 0.25px;
+    text-shadow: 0 1px 2px rgba(24, 11, 44, 0.35);
+    line-height: 1.15;
+}
+.hero-icons .icon-item {
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-decoration:none;
+    padding:8px 10px;
+    border-radius:12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+}
+.hero-icons .icon-item:hover .hero-box {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 56px rgba(74,42,143,0.16);
+    background: linear-gradient(180deg,#fcf9ff 0%, #f6f3ff 100%);
+    border-color: rgba(74,42,143,0.5);
+}
+.hero-icons .icon-item:hover { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.2); }
+
+@media (max-width: 767px) {
+    .hero-icons .icon-item .label {
+        font-size: 0.92rem;
+        font-weight: 700;
+    }
+}
+
+.search-highlight {
+    background: #ffe08a;
+    color: #2a1638;
+    border-radius: 4px;
+    padding: 0 4px;
+    font-weight: 700;
+}
+
+.featured-card {
+    border: 1px solid rgba(111, 97, 249, 0.12);
+    box-shadow: 0 14px 32px rgba(42, 22, 56, 0.12);
+    overflow: hidden;
+    border-radius: 18px;
+    background: #fff;
+}
+
+.featured-card .package-body {
+    padding-top: 16px;
+}
+
+.venue-image {
+    position: relative;
+    min-height: 220px;
+    border-radius: 18px 18px 0 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 18px;
+    color: #fff;
+}
+
+.venue-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 10, 15, 0.12), rgba(10, 10, 15, 0.55));
+}
+
+.venue-image > * {
+    position: relative;
+    z-index: 1;
+}
+
+.venue-image--royal {
+    background:
+        linear-gradient(135deg, rgba(255, 213, 128, 0.2), rgba(68, 42, 17, 0.1)),
+        url('../assets/venues/royal-garden.jpg') center/cover no-repeat,
+        radial-gradient(circle at 20% 20%, rgba(255, 236, 160, 0.35), transparent 30%),
+        linear-gradient(135deg, #1f140a 0%, #2f2210 45%, #6b4d1f 100%);
+}
+
+.venue-image--pearl {
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.42), rgba(234, 215, 197, 0.1)),
+        url('../assets/venues/pearl-palace.jpg') center/cover no-repeat,
+        radial-gradient(circle at 75% 20%, rgba(255, 240, 214, 0.42), transparent 24%),
+        linear-gradient(135deg, #c7a27a 0%, #e7d4bf 50%, #f6efe8 100%);
+}
+
+.package-image--wedding {
+    background:
+        linear-gradient(135deg, rgba(255, 245, 236, 0.2), rgba(60, 36, 20, 0.1)),
+        url('../assets/venues/wedding-hands.jpg') center/cover no-repeat,
+        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.28), transparent 24%),
+        linear-gradient(135deg, #7d8794 0%, #afb9c5 45%, #e9edf3 100%);
+}
+
+.package-image--gold {
+    background:
+        linear-gradient(135deg, rgba(255, 225, 151, 0.15), rgba(98, 61, 11, 0.08)),
+        url('../assets/venues/pearl-palace.jpg') center/cover no-repeat,
+        radial-gradient(circle at 80% 25%, rgba(255, 239, 186, 0.32), transparent 28%),
+        linear-gradient(135deg, #5d3a06 0%, #b07b15 50%, #f2cf72 100%);
+}
+
+.package-image--platinum {
+    background:
+        linear-gradient(135deg, rgba(232, 240, 255, 0.25), rgba(92, 103, 125, 0.08)),
+        url('../assets/venues/royal-garden.jpg') center/cover no-repeat,
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.3), transparent 28%),
+        linear-gradient(135deg, #5e6c7e 0%, #9aa8b8 48%, #eff4fb 100%);
+}
+
+.venue-overlay {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 85%;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.venue-badge {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(10px);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+@media (max-width: 767px) {
+    .featured-card {
+        min-width: 250px !important;
+        max-width: 250px !important;
+    }
+
+    .venue-image {
+        min-height: 180px;
+    }
+}
+
+/* Featured venue image style */
+.venue-image { height:110px; object-fit:cover; width:100%; border-radius:10px; display:block }
+.venue-image.placeholder { background: linear-gradient(180deg,#fbf8ff 0%, #f3efff 100%); display:flex; align-items:center; justify-content:center; color: #4a2a8f; font-weight:700; font-size:0.95rem }
+.package-card .package-body { padding:12px }
+
+/* Budget bar: make the track light and the filled portion gradient */
+.progress { background: linear-gradient(90deg,#f2eaf7,#faf6fb); height:12px; border-radius:12px; box-shadow:none }
+.progress .progress-bar { border-radius:12px; background:linear-gradient(90deg,#6f61f9,#ff6ea6) }
+
+/* Packages list style to match featured venues layout */
+.packages-list { gap:16px }
+.packages-list .package-card { min-width:170px; max-width:220px; border-radius:12px; }
+.packages-list .venue-image { height:120px }
+
+@media (max-width:767px) {
+    .packages-list .package-card { min-width:150px; max-width:180px }
+    .packages-list .venue-image { height:100px }
+}
+
+
+/* make the dashboard look more compact on small screens */
+@media (max-width: 767px) {
+    .dashboard-hero { padding: 28px 0 }
+    .metric-card { padding: 18px }
+    .section-card { padding: 16px }
+    .package-card { min-width:150px; max-width:150px }
+}
+
+
+/* Notification and small controls */
+#notificationsBtn { width:40px; height:36px }
+
+
+/* Table polish */
+.table thead th { background: transparent; color: #6b5fb5; font-weight:700; border-bottom: none; }
+.table thead { border-bottom: 1px solid #eef0fb }
+.table tbody tr td { vertical-align: middle; color: #2d2444; font-weight: 500; }
+
+/* Responsive tweaks */
+@media (max-width: 767px) {
+    .dashboard-hero { padding: 36px 0 }
+    .dashboard-hero h1 { font-size: 1.6rem }
+    .metric-card .display-6 { font-size: 1.6rem }
+}
+
+/* ====================================
+   Mobile Dashboard Styles
+   ==================================== */
+.mobile-dashboard {
+    max-width: 420px;
+}
+.mobile-dashboard header .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 40px;
+}
+.big-day-card {
+    background: linear-gradient(180deg, #fff4f9, #f7e6ef);
+    border-radius: 12px;
+    color: var(--dark-purple);
+    box-shadow: 0 8px 20px rgba(43,21,48,0.06);
+}
+.big-day-card h3 { color: #fff; }
+.budget-section .progress { background: #f3e8ef; }
+.icon-grid .rounded-circle { box-shadow: 0 6px 18px rgba(43,21,48,0.12); border: none; background: var(--primary-color); }
+.featured-venues .venue-card { border-radius: 12px; min-width: 150px; background: linear-gradient(180deg,#fff4f9,#f6e6f1); color: var(--dark-purple); }
+.venue-card .venue-image { border-radius: 8px; box-shadow: 0 8px 20px rgba(43,21,48,0.08); }
+.venue-card .venue-image { border-radius: 8px; }
+
+/* Recent bookings mobile list */
+#bookingRowsMobile .booking-item { padding: 10px 0; border-bottom: 1px solid #f0eef8; }
+#bookingRowsMobile .booking-item .status { font-weight: 700; }
+
+@media (min-width: 768px) {
+    .mobile-dashboard { max-width: 100%; }
+}
+
+/* Dark header and theme */
+.mobile-header { background: linear-gradient(180deg, var(--primary-color), var(--dark-purple)); padding: 18px; border-radius: 12px; color: #fff; }
+.mobile-dashboard { color: var(--dark-purple); background: transparent }
+.card { background: #ffffff; }
+.btn-danger { background: var(--primary-color); border-color: var(--primary-color); color: #fff }
+.btn-outline-light { border-color: rgba(0,0,0,0.06); color: rgba(0,0,0,0.65); }
+.small.text-muted { color: rgba(47,22,48,0.6) }
+.text-muted { color: rgba(47,22,48,0.7) }
+.badge.bg-success { background: #28a745 }
+.badge.bg-warning { background: #ffc107; color: #222 }
+
+
+.card-header {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px 10px 0 0 !important;
+}
+
+/* ====================================
+   ALERTS
+   ==================================== */
+.alert {
+    border: none;
+    border-radius: 8px;
+}
+
+.alert-danger {
+    background-color: rgba(216, 27, 96, 0.1);
+    color: var(--primary-color);
+}
+
+.alert-success {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+}
+
+/* ====================================
+   ANIMATIONS
+   ==================================== */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====================================
+   RESPONSIVE DESIGN
+   ==================================== */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0;
+        min-height: 400px;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section .lead {
+        font-size: 1rem;
+    }
+
+    .features-section,
+    .testimonials-section {
+        padding: 50px 0;
+    }
+
+    .feature-card,
+    .testimonial-card,
+    .package-card {
+        margin-bottom: 20px;
+    }
+
+    .table {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section h1 {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .feature-card,
+    .package-card {
+        margin-bottom: 15px;
+    }
+}
+
+/* ====================================
+   UTILITY CLASSES
+   ==================================== */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.bg-primary-light {
+    background-color: var(--light-pink);
+}
+
+.rounded-3 {
+    border-radius: 20px !important;
+}
+
+.shadow-lg {
+    box-shadow: var(--shadow) !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.no-decoration {
+    text-decoration: none;
+}

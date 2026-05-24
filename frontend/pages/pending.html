@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Booking - The Best Wedding Planning Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-white" href="../index.html"><i class="fas fa-ring me-2"></i>The Best Wedding</a>
+            <div class="ms-auto d-flex align-items-center gap-2">
+                <a href="dashboard.html" class="btn btn-light btn-sm"><i class="fas fa-arrow-left me-1"></i>Dashboard</a>
+                <button id="logoutBtn" class="btn btn-outline-light btn-sm">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h3 class="mb-1">Pending Booking Information</h3>
+                    <p class="text-muted mb-0">Check your selected pending booking details.</p>
+                </div>
+            </div>
+
+            <div id="messageBox" class="alert alert-info d-none"></div>
+
+            <div id="bookingDetailCard" class="card section-card p-4 mb-4 d-none">
+                <h5 class="mb-3">Booking Details</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle mb-0">
+                        <tbody id="bookingDetailBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card section-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0">All Pending Bookings</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Event Date</th>
+                                <th>Guest Count</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pendingRows">
+                            <tr><td colspan="5" class="text-muted">Loading pending bookings...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        function requireAuth() {
+            if (!localStorage.getItem('token')) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+
+        function getStoredToken() {
+            try {
+                return APP.getData('token') || localStorage.getItem('token') || '';
+            } catch (error) {
+                return localStorage.getItem('token') || '';
+            }
+        }
+
+        function formatEventDate(dateValue) {
+            if (!dateValue) return '-';
+            const date = new Date(dateValue);
+            if (Number.isNaN(date.getTime())) return dateValue;
+            return date.toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            });
+        }
+
+        function showMessage(text, type = 'info') {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.className = `alert alert-${type}`;
+            messageBox.textContent = text;
+            messageBox.classList.remove('d-none');
+        }
+
+        function renderPendingRows(bookings, selectedBookingId) {
+            const rows = document.getElementById('pendingRows');
+
+            if (!bookings.length) {
+                rows.innerHTML = '<tr><td colspan="5" class="text-muted">No pending bookings found.</td></tr>';
+                return;
+            }
+
+            rows.innerHTML = bookings.map((booking) => {
+                const id = Number(booking.booking_id);
+                const isSelected = selectedBookingId === id;
+                return `
+                    <tr ${isSelected ? 'class="table-active"' : ''}>
+                        <td>#${id}</td>
+                        <td>${formatEventDate(booking.event_date)}</td>
+                        <td>${booking.guest_count || '-'}</td>
+                        <td><span class="badge bg-warning text-dark">${booking.status || 'Pending'}</span></td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-primary" href="pending.html?id=${id}">
+                                View Info
+                            </a>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function renderBookingDetails(booking) {
+            const body = document.getElementById('bookingDetailBody');
+            const detailCard = document.getElementById('bookingDetailCard');
+
+            const rows = [
+                ['Booking ID', `#${booking.booking_id || '-'}`],
+                ['Bride Name', booking.bride_name || '-'],
+                ['Groom Name', booking.groom_name || '-'],
+                ['Event Date', formatEventDate(booking.event_date)],
+                ['Guest Count', booking.guest_count || '-'],
+                ['Budget', booking.budget ? `৳${Number(booking.budget).toLocaleString()}` : '-'],
+                ['Phone', booking.phone || '-'],
+                ['Email', booking.email || '-'],
+                ['Notes', booking.notes || '-'],
+                ['Status', booking.status || 'Pending']
+            ];
+
+            body.innerHTML = rows.map(([label, value]) => `
+                <tr>
+                    <th style="width: 220px;">${label}</th>
+                    <td>${value}</td>
+                </tr>
+            `).join('');
+
+            detailCard.classList.remove('d-none');
+        }
+
+        function getSelectedBookingId() {
+            const params = new URLSearchParams(window.location.search);
+            const bookingId = Number(params.get('id'));
+            return Number.isNaN(bookingId) ? null : bookingId;
+        }
+
+        function getDemoPendingBookings() {
+            const demoBookings = [
+                { booking_id: 101, bride_name: 'Aisha', groom_name: 'Rafi', event_date: '2026-06-15', guest_count: 200, budget: 150000, phone: '01700000000', email: 'aisha@example.com', notes: 'Need floral stage decoration', status: 'Pending' },
+                { booking_id: 102, bride_name: 'Nadia', groom_name: 'Sami', event_date: '2026-08-02', guest_count: 350, budget: 250000, phone: '01800000000', email: 'nadia@example.com', notes: 'Approved booking', status: 'Approved' }
+            ];
+
+            return demoBookings.filter((booking) => (booking.status || '').toLowerCase() === 'pending');
+        }
+
+        async function loadPendingPage() {
+            if (!requireAuth()) return;
+
+            const selectedBookingId = getSelectedBookingId();
+            const isDemoSession = getStoredToken().startsWith('demo-');
+            let pendingBookings = [];
+
+            try {
+                if (isDemoSession) {
+                    pendingBookings = getDemoPendingBookings();
+                } else {
+                    const bookings = await APP.makeApiRequest('/bookings/my-bookings');
+                    pendingBookings = bookings.filter((booking) => (booking.status || '').toLowerCase() === 'pending');
+                }
+
+                renderPendingRows(pendingBookings, selectedBookingId);
+
+                if (selectedBookingId) {
+                    const selectedBooking = pendingBookings.find((booking) => Number(booking.booking_id) === selectedBookingId);
+
+                    if (selectedBooking) {
+                        renderBookingDetails(selectedBooking);
+                    } else if (!isDemoSession) {
+                        try {
+                            const booking = await APP.makeApiRequest(`/bookings/${selectedBookingId}`);
+                            const isPending = (booking.status || '').toLowerCase() === 'pending';
+
+                            if (isPending) {
+                                renderBookingDetails(booking);
+                            } else {
+                                showMessage('Selected booking is not in pending status.', 'warning');
+                            }
+                        } catch (error) {
+                            showMessage('Could not load selected booking details.', 'warning');
+                        }
+                    } else {
+                        showMessage('Selected pending booking was not found.', 'warning');
+                    }
+                }
+            } catch (error) {
+                showMessage('Failed to load pending bookings. Please try again.', 'danger');
+                document.getElementById('pendingRows').innerHTML = '<tr><td colspan="5" class="text-muted">Unable to load pending bookings right now.</td></tr>';
+            }
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', APP.logout);
+        loadPendingPage();
+    </script>
+</body>
+</html>

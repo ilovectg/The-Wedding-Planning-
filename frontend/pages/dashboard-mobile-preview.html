@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard Mobile Preview</title>
+  <style>
+    /* Minimal mobile preview styles (extracted) */
+    :root{--primary-color:#3b1f3a;--accent-pink:#ffd6ea}
+    body{font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;margin:0;background:#f3eef8}
+    .wrap{max-width:420px;margin:24px auto;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#3b223c,#2b1530);color:#fff;box-shadow:0 18px 50px rgba(43,21,48,0.28)}
+    .mobile-header{padding:18px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,var(--primary-color),#24102a)}
+    .mobile-header .title{font-weight:700}
+    .hero-avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#fff,#ffd6ea);display:flex;align-items:center;justify-content:center;color:var(--primary-color);font-weight:700}
+    .mobile-search{padding:12px 18px;background:rgba(255,255,255,0.06);border-radius:14px;margin:12px 18px;color:rgba(255,255,255,0.95);display:flex;align-items:center}
+    .big-day-card{background:linear-gradient(180deg,#fff4f9,#f7e6ef);color:var(--primary-color);border-radius:14px;padding:18px;margin:12px;background-clip:padding-box}
+    .big-day-card .days{font-size:3.6rem;font-weight:900;line-height:1}
+    .big-day-card .date{font-size:0.9rem;color:#6b4a6b}
+    .heart{width:46px;height:46px;border-radius:12px;border:2px solid rgba(139,95,191,0.12);display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#fff,#ffd6ea);color:#c33b7a}
+    .budget-row{padding:12px 18px;margin-top:8px}
+    .budget-figures{font-weight:700;color:#452b3b}
+    .budget-bar{height:12px;background:#f3e8ef;border-radius:12px;overflow:hidden}
+    .budget-bar > i{display:block;height:100%;background:linear-gradient(90deg,#8a5fbf,#cfa0e6);width:0%}
+    .icon-grid{display:flex;gap:10px;padding:10px 18px}
+    .icon-item{flex:1;background:linear-gradient(180deg,#fff4f9,#f6e6f1);padding:12px;border-radius:12px;text-align:center;color:var(--primary-color)}
+    .featured-venues{padding:10px 0 22px 0}
+    .venue-scroll{display:flex;gap:12px;overflow-x:auto;padding:0 18px 18px 18px}
+    .venue-card{min-width:140px;max-width:160px;background:white;color:var(--primary-color);border-radius:12px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+    .venue-card .thumb{height:78px;border-radius:10px;background:linear-gradient(135deg,#8a5fbf,#cfa0e6);margin-bottom:10px}
+    .mobile-nav{background:#fff;padding:10px 0;border-top-left-radius:18px;border-top-right-radius:18px;display:flex;justify-content:space-around;color:#6b4a6b}
+    .mobile-nav .item{font-size:12px;text-align:center}
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="mobile-statusbar" style="display:flex;justify-content:space-between;align-items:center;padding:8px 14px;color:rgba(255,255,255,0.9);font-size:13px">
+      <div>9:41</div>
+      <div></div>
+      <div style="display:flex;gap:10px;align-items:center"><i class="fas fa-ellipsis-v"></i><div class="hero-avatar" style="width:34px;height:34px;line-height:34px">S</div></div>
+    </div>
+    <div class="mobile-header">
+      <div>
+        <div class="small">Good morning ✨</div>
+        <div class="title">Safa & Nur</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div class="hero-avatar">S</div>
+      </div>
+    </div>
+    <div class="mobile-search">🔍 <span style="margin-left:10px">Search venues, packages...</span></div>
+    <div class="big-day-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div style="font-size:12px;color:#6b4a6b">Your Big Day</div>
+          <div class="days" id="pvDays">247 days</div>
+          <div class="date" id="pvDate">March 15, 2026</div>
+        </div>
+        <div class="heart">❤</div>
+      </div>
+      <div class="budget-row">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:12px;color:#6b4a6b">Budget</div>
+          <div class="budget-figures"><span id="pvSpent">৳2,40,000</span> / <span id="pvTarget">৳5,00,000</span></div>
+        </div>
+        <div class="budget-bar mt-2"><i id="pvFill" style="width:48%"></i></div>
+      </div>
+    </div>
+    <div class="icon-grid">
+      <div class="icon-item">📍<div>Venues</div></div>
+      <div class="icon-item">🎁<div>Packages</div></div>
+      <div class="icon-item">💳<div>Payments</div></div>
+      <!-- Checklist removed -->
+    </div>
+    <div class="featured-venues">
+      <div style="padding:0 18px"><div style="font-size:12px;color:rgba(255,255,255,0.8)">Featured Venues</div></div>
+      <div class="venue-scroll">
+        <div class="venue-card"><div class="thumb"></div><div style="font-weight:700">Grand Ballroom Dhaka</div><div style="font-size:12px;color:#6b4a6b">Gulshan</div><div style="color:#8a5fbf;font-weight:700;margin-top:6px">৳1,50,000</div></div>
+        <div class="venue-card"><div class="thumb"></div><div style="font-weight:700">Riverside Resort</div><div style="font-size:12px;color:#6b4a6b">Narayanganj</div><div style="color:#8a5fbf;font-weight:700;margin-top:6px">৳1,00,000</div></div>
+        <div class="venue-card"><div class="thumb"></div><div style="font-weight:700">Sky Garden Convention</div><div style="font-size:12px;color:#6b4a6b">Banani</div><div style="color:#8a5fbf;font-weight:700;margin-top:6px">৳1,20,000</div></div>
+      </div>
+    </div>
+    <div class="mobile-nav">
+      <div class="item">🏠<div>Home</div></div>
+      <div class="item">🔎<div>Explore</div></div>
+      <div class="item">❤<div>Saved</div></div>
+      <div class="item">📅<div>Booking</div></div>
+      <div class="item">👤<div>Profile</div></div>
+    </div>
+  </div>
+</body>
+</html>

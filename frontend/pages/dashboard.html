@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - The Best Wedding Planning Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-white" href="../index.html"><i class="fas fa-ring me-2"></i>The Best Wedding</a>
+            <div class="ms-auto d-flex align-items-center gap-2">
+                <button id="logoutBtn" class="btn btn-outline-light btn-sm">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="dashboard-hero" role="main">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                    <h1 class="display-6 fw-bold mb-0">Welcome, <span id="userName">Guest</span></h1>
+                </div>
+                <div class="text-end">
+                    <a id="profileTopBtn" href="profile.html" class="btn btn-light btn-sm me-2" title="Profile"><i class="fas fa-user"></i></a>
+                </div>
+            </div>
+
+            <!-- Mobile style search and big-day row -->
+            <div class="row g-3 align-items-center mb-3">
+                <div class="col-md-7 col-lg-8">
+                    <div class="input-group search-box shadow-sm" role="search">
+                        <span class="input-group-text bg-white"><i class="fas fa-search text-muted"></i></span>
+                        <input id="dashboardSearch" type="search" class="form-control" placeholder="Search venues, packages, or services" autocomplete="off">
+                    </div>
+                    <div id="searchResultInfo" class="small text-white-50 mt-2"></div>
+                </div>
+                <div class="col-md-5 col-lg-4">
+                    <div class="big-day-card p-3 text-dark">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="small text-muted">Wedding Countdown</div>
+                                <div class="h4 fw-bold" id="bigDayCount">247 days</div>
+                            </div>
+                            <div class="heart-badge"><i class="fas fa-heart"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Icon tiles under Big Day (hero) -->
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="icon-grid hero-icons d-flex justify-content-between align-items-center px-1">
+                        <a href="venues.html" class="icon-item no-decoration text-center">
+                            <div class="icon-box hero-box" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Venues">
+                                        <path d="M12 21s-7-7.753-7-12A7 7 0 0 1 19 9c0 4.247-7 12-7 12z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <circle cx="12" cy="9" r="2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                </svg>
+                            </div>
+                            <span class="label">Venues</span>
+                        </a>
+                        <a href="packages.html" class="icon-item no-decoration text-center">
+                            <div class="icon-box hero-box" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Packages">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 3v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M7 7l5 4 5-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </div>
+                            <span class="label">Packages</span>
+                        </a>
+                        <a href="payment.html" class="icon-item no-decoration text-center">
+                            <div class="icon-box hero-box" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Payments">
+                                    <rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></rect>
+                                    <path d="M2 10h20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <circle cx="8" cy="15" r="1.2" fill="currentColor"></circle>
+                                    <path d="M16 14.5c0 .828-.895 1.5-2 1.5s-2-.672-2-1.5 0-1.5 2-1.5 2 .672 2 1.5z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                </svg>
+                            </div>
+                            <span class="label">Payments</span>
+                        </a>
+                        <!-- Checklist removed as requested -->
+                    </div>
+                </div>
+            </div>
+            
+            <p class="lead mb-0">Plan, track, and manage your wedding activities from one dashboard.</p>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="card section-card p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0">Latest Bookings</h5>
+                            <a href="booking.html" class="btn btn-primary btn-sm">Create Booking</a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-middle mb-0">
+                                <thead><tr><th>Booking ID</th><th>Event Date</th><th>Guest Count</th><th>Status</th></tr></thead>
+                                <tbody id="bookingRows"><tr><td colspan="4" class="text-muted">Loading bookings...</td></tr></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        const dashboardState = { bookings: [] };
+
+        let runDashboardSearch = null;
+
+        function requireAuth() {
+            if (!localStorage.getItem('token')) { window.location.href = 'login.html'; return false; }
+            return true;
+        }
+
+        function getStoredUser() { try { return JSON.parse(localStorage.getItem('user') || 'null'); } catch { return null; } }
+        function getStoredToken() { try { return APP.getData('token') || localStorage.getItem('token') || ''; } catch { return localStorage.getItem('token') || ''; } }
+
+        function updateBigDayDisplay(dateValue){
+            const elCount = document.getElementById('bigDayCount');
+            const elTarget = document.querySelector('.big-day-card .small.text-muted');
+            if(!dateValue){ if(elCount) elCount.textContent = '—'; if(elTarget) elTarget.textContent = 'No date set'; return; }
+            const days = APP.calculateDaysRemaining(dateValue);
+            const d = new Date(dateValue);
+            const targetText = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            if(elCount) elCount.textContent = (days >= 0) ? `${days} day${days!==1 ? 's' : ''}` : 'Date passed';
+            if(elTarget) elTarget.textContent = `Target date: ${targetText}`;
+        }
+
+        function renderBookings(bookings, emptyMessage = 'No bookings found yet.', searchQuery = '') {
+            const rows = document.getElementById('bookingRows');
+            if (!bookings || !bookings.length) { rows.innerHTML = `<tr><td colspan="4" class="text-muted">${emptyMessage}</td></tr>`; return; }
+            const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&');
+            const highlightMatch = (value) => { const text = String(value ?? '-'); if (!searchQuery) return text; const regex = new RegExp(`(${escapeRegex(searchQuery)})`, 'ig'); return text.replace(regex, '<mark class="search-highlight">$1</mark>'); };
+            const formatEventDate = (dateValue) => { if (!dateValue) return '-'; const date = new Date(dateValue); if (Number.isNaN(date.getTime())) return dateValue; return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }); };
+            const renderStatusCell = (booking) => { const status = booking.status || 'Pending'; const normalized = status.toLowerCase(); const highlightedStatus = highlightMatch(status); if (normalized === 'pending') return `<a href="pending.html?id=${booking.booking_id}" class="btn btn-sm btn-warning text-dark fw-semibold">${highlightedStatus}</a>`; if (normalized === 'approved') return `<span class="badge bg-success">${highlightedStatus}</span>`; if (normalized === 'rejected') return `<span class="badge bg-danger">${highlightedStatus}</span>`; return `<span class="badge bg-secondary">${highlightedStatus}</span>`; };
+            rows.innerHTML = bookings.slice(0, 5).map((booking) => `
+                <tr>
+                    <td>#${highlightMatch(booking.booking_id)}</td>
+                    <td>${highlightMatch(formatEventDate(booking.event_date))}</td>
+                    <td>${highlightMatch(booking.guest_count || '-')}</td>
+                    <td>${renderStatusCell(booking)}</td>
+                </tr>
+            `).join('');
+        }
+
+        function setupDashboardSearch() {
+            const searchInput = document.getElementById('dashboardSearch');
+            const searchResultInfo = document.getElementById('searchResultInfo');
+            const venueCards = Array.from(document.querySelectorAll('#featuredVenues .package-card'));
+            const packageCards = Array.from(document.querySelectorAll('.packages-list .package-card'));
+            if (!searchInput) return;
+            const normalize = (value) => (value || '').toString().trim().toLowerCase();
+            const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&');
+            const filterCards = (cards, query) => { let visible = 0; const highlightCardText = (card, searchValue) => { const textNodes = card.querySelectorAll('.placeholder, .fw-semibold, .small, .fw-bold'); textNodes.forEach((node) => { const baseText = node.dataset.baseText || node.textContent; node.dataset.baseText = baseText; if (!searchValue) { node.textContent = baseText; return; } const regex = new RegExp(`(${escapeRegex(searchValue)})`, 'ig'); node.innerHTML = baseText.replace(regex, '<mark class="search-highlight">$1</mark>'); }); }; cards.forEach((card) => { const text = normalize(card.textContent); const shouldShow = !query || text.includes(query); card.style.display = shouldShow ? '' : 'none'; highlightCardText(card, query); if (shouldShow) visible += 1; }); return visible; };
+            const filterBookings = (bookings, query) => { if (!query) return bookings; return bookings.filter((booking) => { const searchableText = [ booking.booking_id, booking.event_date, booking.guest_count, booking.status ].join(' ').toLowerCase(); return searchableText.includes(query); }); };
+            runDashboardSearch = () => { const query = normalize(searchInput.value); const visibleVenues = filterCards(venueCards, query); const visiblePackages = filterCards(packageCards, query); const filteredBookings = filterBookings(dashboardState.bookings, query); renderBookings(filteredBookings, query ? 'No matching bookings found.' : 'No bookings found yet.', query); if (!query) { searchResultInfo.textContent = ''; return; } const totalMatches = visibleVenues + visiblePackages + filteredBookings.length; searchResultInfo.textContent = totalMatches ? `${totalMatches} result${totalMatches > 1 ? 's' : ''} found` : 'No matching venue, package, or booking found'; };
+            searchInput.addEventListener('input', runDashboardSearch);
+            searchInput.addEventListener('keydown', (event) => { if (event.key === 'Escape') { searchInput.value = ''; runDashboardSearch(); } });
+        }
+
+        function setDemoDashboard(user) {
+            const demoBookings = [ { booking_id: 101, event_date: '2026-06-15', guest_count: 200, status: 'Pending' }, { booking_id: 102, event_date: '2026-08-02', guest_count: 350, status: 'Approved' } ];
+            dashboardState.bookings = demoBookings; renderBookings(demoBookings); if (runDashboardSearch) runDashboardSearch(); const pending = demoBookings.filter(b => (b.status || '').toString().toLowerCase() === 'pending').map(b=>({...b, d:new Date(b.event_date)})).filter(b=>!isNaN(b.d.getTime())).sort((a,b)=>a.d - b.d)[0]; const nextAny = demoBookings.map(b=>({...b, d:new Date(b.event_date)})).filter(b=>!isNaN(b.d.getTime())).sort((a,b)=>a.d - b.d)[0]; const chosen = pending || nextAny; if(chosen) updateBigDayDisplay(chosen.event_date);
+        }
+
+        async function loadDashboard() {
+            if (!requireAuth()) return;
+            const user = getStoredUser();
+            const isDemoSession = getStoredToken().startsWith('demo-');
+            if (user) { const nameEl = document.getElementById('userName'); if (nameEl) nameEl.textContent = user.first_name || 'Guest'; }
+            if (isDemoSession) { setDemoDashboard(user); return; }
+            try {
+                const [, bookings] = await Promise.all([ APP.makeApiRequest('/auth/profile'), APP.makeApiRequest('/bookings/my-bookings'), APP.makeApiRequest('/bookings/wishlist') ]);
+                dashboardState.bookings = Array.isArray(bookings) ? bookings : [];
+                renderBookings(dashboardState.bookings);
+                if (runDashboardSearch) runDashboardSearch();
+                const pending = (dashboardState.bookings || []).filter(b => (b.status || '').toString().toLowerCase() === 'pending').map(b=>({...b, d: new Date(b.event_date)})).filter(b=>b.event_date && !isNaN(b.d.getTime())).sort((a,b)=>a.d - b.d)[0];
+                const nextAny = (dashboardState.bookings || []).map(b=>({...b, d: new Date(b.event_date)})).filter(b=>b.event_date && !isNaN(b.d.getTime())).sort((a,b)=>a.d - b.d)[0];
+                const chosen = pending || nextAny; if (chosen) updateBigDayDisplay(chosen.event_date);
+            } catch (error) {
+                const localBooking = APP.getData('bookingConfirmation');
+                if (localBooking) { dashboardState.bookings = [localBooking]; renderBookings(dashboardState.bookings); updateBigDayDisplay(localBooking.event_date); if (runDashboardSearch) runDashboardSearch(); return; }
+                document.getElementById('bookingRows').innerHTML = '<tr><td colspan="4" class="text-muted">Unable to load bookings right now. Please try again.</td></tr>';
+            }
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', APP.logout);
+        function setAvatarInitial(name){ const initial = (name || 'G').charAt(0).toUpperCase(); const top = document.getElementById('topAvatar'); if(top) top.textContent = initial; const av = document.querySelector('.avatar'); if(av) av.textContent = initial; }
+        const originalSetDemo = setDemoDashboard; setDemoDashboard = function(user){ originalSetDemo(user); const name = user?.first_name || 'Guest'; setAvatarInitial(name); const days = 247; const el = document.getElementById('bigDayCount'); if(el) el.textContent = days + ' days'; }
+        setupDashboardSearch(); loadDashboard();
+    </script>
+</body>
+</html>
