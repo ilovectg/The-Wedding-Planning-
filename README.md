@@ -1,28 +1,24 @@
 # 🌸 The Best Wedding Planning Services
 
-This README lists only the features that are implemented in this repository.
-
 ## Implemented Features
 
 Core features (completed):
-- User registration and login (registration form, validation, email verification, JWT authentication, password hashing, forgot-password).
+- User registration and login (registration form, validation, email verification, authentication, password , forgot-password).
 - Wedding packages (three package types: Silver, Gold, Premium; detailed package pages and package management APIs).
 - Venue booking system (multi-step booking flow: venue selection, date selection, service selection, booking confirmation).
 - Budget calculator (interactive calculator with package recommendations and real-time cost calculation).
 - Event services (catering, decoration, photography, makeup, DJ/music, car rental; services stored in `services` table).
-- Gallery section (photo and video uploads, categories, sample images in `gallery` table).
 - Online booking form (multi-step booking form with validation and confirmation).
 - Admin dashboard setup (dashboard API structure, admin authentication middleware, booking and package management endpoints).
 
 Advanced / additional features (completed):
 - Review & rating system (review submission, 5-star rating, comments, admin approval; `reviews` table).
-- Wishlist / favorites (add/remove items, wishlist management; `wishlist` table).
-- Notification system (booking and payment notifications, reminders; `notifications` table).
+- Notification system (booking and payment notifications, reminders; )`
 - Theme & decoration preview (5 decoration themes stored in `decoration_themes` table).
 
 ## Backend & Database
 - API endpoints: 30+ endpoints implemented (authentication, bookings, admin functions, packages, payments, wishlist, notifications).
-- Database: 13 tables implemented: `users`, `packages`, `venues`, `services`, `bookings`, `payments`, `gallery`, `reviews`, `wishlist`, `notifications`, `decoration_themes`, `booking_services`, `admin_logs`.
+- Database: 13 tables implemented: `users`, `packages`, `venues`, `services`, `bookings`, `payments`, `reviews`,  `decoration_themes`, `booking_services`, `admin_logs`.
 
 ## Getting Started (how to run the implemented project)
 1. Database setup
@@ -50,5 +46,5 @@ Open `frontend/index.html` in your browser or serve the `frontend` folder from a
 - Backend controllers: `backend/controllers/`
 - Database schema: `database/schema.sql`
 
-**Created by:** Wedding Planning Team
-**Last Updated:** May 2026
+**Created by:** Sadia Nur Safa
+
